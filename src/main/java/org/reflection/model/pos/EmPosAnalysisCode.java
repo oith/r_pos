@@ -6,6 +6,7 @@ package org.reflection.model.pos;
 public enum EmPosAnalysisCode {
     SUPPLIER,
     CUSTOMER,
+    GROUP,
     BRAND,
     CATEGORY,
     COLOR,

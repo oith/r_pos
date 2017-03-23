@@ -1,8 +1,6 @@
 package org.reflection.service.auth;
 
 import org.apache.commons.lang.LocaleUtils;
-import org.reflection.model.auth.AuthUserEnvKey;
-import org.reflection.model.com.enums.EnvKey;
 import org.reflection.service.util.MenuGen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -73,17 +71,10 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
         /*Set target URL to redirect*/
         //String targetUrl = determineTargetUrl(authentication);
 
-        String url = "/main";
-        try {
-            for (AuthUserEnvKey authUserEmFieldEnv : authUserExt.getAuthUserEnvKeys()) {
+        String url = authUserExt.getAfterLoginUrl();// "/main";
 
-                if (authUserEmFieldEnv.getEnvKey() == EnvKey.AFTER_LOGIN_URL) {
-                    url = authUserEmFieldEnv.getEnvValue();
-                    break;
-                }
-            }
-        } catch (Exception e) {
-        }
+        if (url == null || url.isEmpty())
+            url = "/main";
 
         redirectStrategy.sendRedirect(request, response, url);
     }

@@ -54,10 +54,10 @@ INSERT INTO AUTH_USER
  TITLE, USERNAME)
 VALUES
   (5, 0, 1, 1, '0191294344',
-   'BD', 1, 'BDT', 'Rowsan', TO_DATE('12/01/1991 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
-   'rowsan@gmail.com', 1, 'Rowsan Ara', 'FEMALE', 'bn',
+   'BD', 1, 'BDT', 'Rowshon', TO_DATE('12/01/1991 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+   'rowshon@gmail.com', 1, 'Rowshon Ara', 'FEMALE', 'bn',
    'bn_BD', 'MENU_LEFT', 1, '$2a$10$su8tS2DoHzJD46Vi9aWFeexyRDeX0QosPHLFG/Ev7dwj1AAco.9OC', 'dddd.jpg',
-   'MS', 'rowsan');
+   'MS', 'rowshon');
 
 
 INSERT INTO POS_SUPPLIER

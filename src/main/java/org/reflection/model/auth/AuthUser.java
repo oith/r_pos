@@ -84,23 +84,8 @@ public class AuthUser extends Abstract {
     @Column(name = "MENU_ORIENTATION", length = 10, nullable = false)
     private MenuOrientation menuOrientation = MenuOrientation.MENU_LEFT;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "AUTH_USER_AUTH_GROUP",
-            joinColumns = {
-                    @JoinColumn(name = "AUTH_USER_ID")},
-            inverseJoinColumns = {
-                    @JoinColumn(name = "AUTH_GROUP_ID")})
-    private Set<AuthGroup> authGroups = new LinkedHashSet();
-
-    @OneToMany(mappedBy = "id.authUser", cascade = CascadeType.ALL)
-    private Set<AuthUserAuthQuestion> authUserAuthQuestions = new LinkedHashSet<>();
-
     @OneToMany(mappedBy = "id.authUser", cascade = CascadeType.ALL)
     private Set<AuthUserAuthRole> authUserAuthRoles = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "authUser", cascade = CascadeType.ALL)
-    private Set<AuthUserEnvKey> authUserEnvKeys = new LinkedHashSet<>();
 
     @Column(name = "ENABLED")
     private Boolean enabled = Boolean.TRUE;
@@ -120,6 +105,9 @@ public class AuthUser extends Abstract {
 
     @Column(name = "DEPARTMENT", length = 50)
     private String department;
+
+    @Column(name = "AFTER_LOGIN_URL", length = 100)
+    private String afterLoginUrl;
 
     public AuthUser() {
     }
@@ -178,22 +166,6 @@ public class AuthUser extends Abstract {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Set<AuthGroup> getAuthGroups() {
-        return authGroups;
-    }
-
-    public void setAuthGroups(Set<AuthGroup> authGroups) {
-        this.authGroups = authGroups;
-    }
-
-    public Set<AuthUserAuthQuestion> getAuthUserAuthQuestions() {
-        return authUserAuthQuestions;
-    }
-
-    public void setAuthUserAuthQuestions(Set<AuthUserAuthQuestion> authUserAuthQuestions) {
-        this.authUserAuthQuestions = authUserAuthQuestions;
     }
 
     public Boolean getEnabled() {
@@ -316,14 +288,6 @@ public class AuthUser extends Abstract {
         this.pic = pic;
     }
 
-    public Set<AuthUserEnvKey> getAuthUserEnvKeys() {
-        return authUserEnvKeys;
-    }
-
-    public void setAuthUserEnvKeys(Set<AuthUserEnvKey> authUserEnvKeys) {
-        this.authUserEnvKeys = authUserEnvKeys;
-    }
-
     public Title getTitle() {
         return title;
     }
@@ -370,6 +334,14 @@ public class AuthUser extends Abstract {
 
     public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
+    }
+
+    public String getAfterLoginUrl() {
+        return afterLoginUrl;
+    }
+
+    public void setAfterLoginUrl(String afterLoginUrl) {
+        this.afterLoginUrl = afterLoginUrl;
     }
 
     @Override

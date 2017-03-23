@@ -8,9 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "POS_Warehouse")
+@Table(name = "POS_BRANCH")
 @MacCodable(id = "id", code = "code", caption = "fullName")
-public class PosWarehouse extends Abstract {
+public class PosBranch extends Abstract {
 
     @Column(name = "CODE", length = 10, nullable = false, unique = true)
     private String code;
@@ -19,10 +19,10 @@ public class PosWarehouse extends Abstract {
     @Column(name = "ADDRESS", length = 200)
     private String address;
 
-    public PosWarehouse() {
+    public PosBranch() {
     }
 
-    public PosWarehouse(String code, String fullName) {
+    public PosBranch(String code, String fullName) {
         this.code = code;
         this.fullName = fullName;
     }

@@ -7,9 +7,7 @@ import org.hibernate.Hibernate;
 import org.reflection.dto._SearchDTO;
 import org.reflection.exception.AuthUserNotFoundException;
 import org.reflection.model.auth.AuthUser;
-import org.reflection.model.auth.AuthUserAuthQuestion;
 import org.reflection.model.auth.AuthUserAuthRole;
-import org.reflection.model.auth.AuthUserEnvKey;
 import org.reflection.repositories.AuthUserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,17 +64,6 @@ public class AuthUserServiceImpl implements AuthUserService {
         BeanUtils.copyProperties(copied, authUser);
         authUser.setId(null);
 
-        for (AuthUserAuthQuestion currDet : authUserOrginal.getAuthUserAuthQuestions()) {
-
-            AuthUserAuthQuestion det = new AuthUserAuthQuestion();
-            BeanUtils.copyProperties(currDet, det);
-
-            det.setAuthUser(authUser);
-            if (authUser.getAuthUserAuthQuestions() == null) {
-                authUser.setAuthUserAuthQuestions(new java.util.LinkedHashSet());
-            }
-            authUser.getAuthUserAuthQuestions().add(det);
-        }
         for (AuthUserAuthRole currDet : authUserOrginal.getAuthUserAuthRoles()) {
 
             AuthUserAuthRole det = new AuthUserAuthRole();
@@ -87,18 +74,6 @@ public class AuthUserServiceImpl implements AuthUserService {
                 authUser.setAuthUserAuthRoles(new java.util.LinkedHashSet());
             }
             authUser.getAuthUserAuthRoles().add(det);
-        }
-        for (AuthUserEnvKey currDet : authUserOrginal.getAuthUserEnvKeys()) {
-
-            AuthUserEnvKey det = new AuthUserEnvKey();
-            BeanUtils.copyProperties(currDet, det);
-            det.setId(null);
-
-            det.setAuthUser(authUser);
-            if (authUser.getAuthUserEnvKeys() == null) {
-                authUser.setAuthUserEnvKeys(new java.util.LinkedHashSet());
-            }
-            authUser.getAuthUserEnvKeys().add(det);
         }
 
 /*
@@ -126,9 +101,8 @@ public class AuthUserServiceImpl implements AuthUserService {
         if (authUser == null) {
             throw new AuthUserNotFoundException();
         }
-        Hibernate.initialize(authUser.getAuthUserAuthQuestions());
+
         Hibernate.initialize(authUser.getAuthUserAuthRoles());
-        Hibernate.initialize(authUser.getAuthUserEnvKeys());
 
         return authUser;
     }
@@ -139,10 +113,7 @@ public class AuthUserServiceImpl implements AuthUserService {
         Iterable<AuthUser> authUsers = authUserRepository.findAll();
 
         for (AuthUser authUser : authUsers) {
-            Hibernate.initialize(authUser.getAuthUserAuthQuestions());
             Hibernate.initialize(authUser.getAuthUserAuthRoles());
-            Hibernate.initialize(authUser.getAuthUserEnvKeys());
-
         }
 
         return authUsers;

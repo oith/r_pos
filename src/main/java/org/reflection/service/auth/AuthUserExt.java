@@ -1,14 +1,10 @@
 package org.reflection.service.auth;
 
-import org.reflection.model.auth.AuthGroup;
-import org.reflection.model.auth.AuthUserAuthQuestion;
-import org.reflection.model.auth.AuthUserEnvKey;
 import org.reflection.model.com.enums.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 import java.util.Date;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class AuthUserExt extends User {
@@ -23,14 +19,11 @@ public class AuthUserExt extends User {
     private String completeMenu;
     private String params;
     private String favorite;
+    private String afterLoginUrl;
     private Language language;
     private Country country;
     private Locale locale;
     private MenuOrientation menuOrientation;
-
-    private Set<AuthGroup> authGroups = new LinkedHashSet<>();
-    private Set<AuthUserAuthQuestion> authUserAuthQuestions = new LinkedHashSet<>();
-    private Set<AuthUserEnvKey> authUserEnvKeys = new LinkedHashSet<>();
 
     public AuthUserExt(String username, String password, Set<GrantedAuthority> authorities) {
         super(username, password, authorities);
@@ -84,14 +77,6 @@ public class AuthUserExt extends User {
         this.doj = doj;
     }
 
-    public Set<AuthUserAuthQuestion> getAuthUserAuthQuestions() {
-        return authUserAuthQuestions;
-    }
-
-    public void setAuthUserAuthQuestions(Set<AuthUserAuthQuestion> authUserAuthQuestions) {
-        this.authUserAuthQuestions = authUserAuthQuestions;
-    }
-
     public String getCompleteMenu() {
         return completeMenu;
     }
@@ -114,14 +99,6 @@ public class AuthUserExt extends User {
 
     public void setFavorite(String favorite) {
         this.favorite = favorite;
-    }
-
-    public Set<AuthGroup> getAuthGroups() {
-        return authGroups;
-    }
-
-    public void setAuthGroups(Set<AuthGroup> authGroups) {
-        this.authGroups = authGroups;
     }
 
     public Gender getGender() {
@@ -164,12 +141,12 @@ public class AuthUserExt extends User {
         this.menuOrientation = menuOrientation;
     }
 
-    public Set<AuthUserEnvKey> getAuthUserEnvKeys() {
-        return authUserEnvKeys;
+    public String getAfterLoginUrl() {
+        return afterLoginUrl;
     }
 
-    public void setAuthUserEnvKeys(Set<AuthUserEnvKey> authUserEnvKeys) {
-        this.authUserEnvKeys = authUserEnvKeys;
+    public void setAfterLoginUrl(String afterLoginUrl) {
+        this.afterLoginUrl = afterLoginUrl;
     }
 
     @Override

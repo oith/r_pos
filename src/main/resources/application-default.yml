@@ -11,11 +11,6 @@ server:
 #      prefix: /views/
 #      suffix: .jsp
 
-
-
-
-
-
 spring:
   data:
     jpa:
@@ -32,7 +27,7 @@ spring:
       naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
       hibernate:
-        default_schema: OITH_PROJECT_DB_USER
+        default_schema: R_POS
         id.new_generator_mappings: true
         dialect: org.hibernate.dialect.Oracle10gDialect
   datasource:
@@ -40,8 +35,8 @@ spring:
     continueOnError: true
     driverClassName: oracle.jdbc.OracleDriver
     url: jdbc:oracle:thin:@localhost:1521:xe
-    username: OITH_PROJECT_DB_USER
-    password: OITH_PROJECT_DB_PASS
+    username: R_POS
+    password: R_POS
   mail:
     host: smtp.gmail.com
     port: 587

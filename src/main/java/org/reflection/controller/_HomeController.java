@@ -84,9 +84,6 @@ public class _HomeController {
 
     @PostConstruct
     public void init() {
-
-        bootStrapService.dummyUserData();
-
         Map<RequestMappingInfo, HandlerMethod> handlerMethods
                 = this.requestMappingHandlerMapping.getHandlerMethods();
 
