@@ -85,7 +85,7 @@ public class AuthUser extends Abstract {
     private MenuOrientation menuOrientation = MenuOrientation.MENU_LEFT;
 
     @OneToMany(mappedBy = "id.authUser", cascade = CascadeType.ALL)
-    private Set<AuthUserAuthRole> authUserAuthRoles = new LinkedHashSet<>();
+    private Set<AhRole> authUserAuthRoles = new LinkedHashSet<>();
 
     @Column(name = "ENABLED")
     private Boolean enabled = Boolean.TRUE;
