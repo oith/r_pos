@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<zxEmps>
+    <zxEmp CODE="34650">
+        <FULL_NAME>Manik Java</FULL_NAME>
+        <SALARY>12300</SALARY>
+        <EMAIL>manikxml@gmail.com</EMAIL>
+        <IS_ACTIVE>true</IS_ACTIVE>
+        <REMARKS>xml manik remarks</REMARKS>
+    </zxEmp>
+    <zxEmp CODE="36553">
+        <FULL_NAME>Anis Biman</FULL_NAME>
+        <SALARY>33100</SALARY>
+        <EMAIL>anisxml@gmail.com</EMAIL>
+        <IS_ACTIVE>false</IS_ACTIVE>
+        <REMARKS>xml anis remarks</REMARKS>
+    </zxEmp>
+    <zxEmp CODE="33279">
+        <FULL_NAME>Saif Grails</FULL_NAME>
+        <SALARY>22300</SALARY>
+        <EMAIL>saifxml@gmail.com</EMAIL>
+        <IS_ACTIVE>true</IS_ACTIVE>
+        <REMARKS>xml saif remarks</REMARKS>
+    </zxEmp>
+</zxEmps>
