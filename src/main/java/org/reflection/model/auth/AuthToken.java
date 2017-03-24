@@ -8,7 +8,7 @@ import java.util.Date;
 
 @MacCareless
 @Entity
-@Table(name = "PERSISTENT_LOGINS")
+@Table(name = "AUTH_PERSISTENT_LOGINS")
 public class AuthToken implements Serializable {
 
     @Id

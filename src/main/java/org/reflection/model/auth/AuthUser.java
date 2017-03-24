@@ -84,8 +84,6 @@ public class AuthUser extends Abstract {
     @Column(name = "MENU_ORIENTATION", length = 10, nullable = false)
     private MenuOrientation menuOrientation = MenuOrientation.MENU_LEFT;
 
-    @OneToMany(mappedBy = "id.authUser", cascade = CascadeType.ALL)
-    private Set<AhRole> authUserAuthRoles = new LinkedHashSet<>();
 
     @Column(name = "ENABLED")
     private Boolean enabled = Boolean.TRUE;
@@ -108,6 +106,10 @@ public class AuthUser extends Abstract {
 
     @Column(name = "AFTER_LOGIN_URL", length = 100)
     private String afterLoginUrl;
+
+    @OneToMany(mappedBy = "authUser", fetch = FetchType.EAGER)
+    private Set<AuthUserAuthRole> authUserAuthRoles = new LinkedHashSet<>();
+
 
     public AuthUser() {
     }
@@ -216,13 +218,7 @@ public class AuthUser extends Abstract {
         this.favorite = favorite;
     }
 
-    public Set<AuthUserAuthRole> getAuthUserAuthRoles() {
-        return authUserAuthRoles;
-    }
 
-    public void setAuthUserAuthRoles(Set<AuthUserAuthRole> authUserAuthRoles) {
-        this.authUserAuthRoles = authUserAuthRoles;
-    }
 
     public Boolean getOpenInNewPage() {
         return openInNewPage;
@@ -342,6 +338,14 @@ public class AuthUser extends Abstract {
 
     public void setAfterLoginUrl(String afterLoginUrl) {
         this.afterLoginUrl = afterLoginUrl;
+    }
+
+    public Set<AuthUserAuthRole> getAuthUserAuthRoles() {
+        return authUserAuthRoles;
+    }
+
+    public void setAuthUserAuthRoles(Set<AuthUserAuthRole> authUserAuthRoles) {
+        this.authUserAuthRoles = authUserAuthRoles;
     }
 
     @Override
