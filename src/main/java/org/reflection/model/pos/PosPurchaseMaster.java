@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "POS_PURCHASE_MST")
-public class PosPurchaseMaster extends AbstractTransactableAmount {
+public class PosPurchaseMaster extends PosAbstractMaster {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "POS_SUPPLIER_ID", nullable = false)
@@ -27,7 +27,7 @@ public class PosPurchaseMaster extends AbstractTransactableAmount {
     }
 
     public PosPurchaseMaster(PosSupplier posSupplier, String code, AbstractTransactableAmount abstractTransactableAmount, Double paidAmount) {
-        super(abstractTransactableAmount);
+        //super(abstractTransactableAmount);
         this.posSupplier = posSupplier;
         this.paidAmount = paidAmount;
     }

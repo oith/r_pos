@@ -111,7 +111,6 @@ public class _HomeController {
 //                //}
 //            }
 //        }
-        bootStrapService.dummyMenuData(list);
         bootStrapService.mock();
     }
 }

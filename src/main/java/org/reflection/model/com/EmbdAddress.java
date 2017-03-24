@@ -2,8 +2,6 @@ package org.reflection.model.com;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
@@ -23,10 +21,6 @@ public class EmbdAddress implements Serializable {
     private String city;
     @Column(length = 30)
     private String village;
-
-    @ManyToOne
-    @JoinColumn(name = "ADM_LOCATION_ID")
-    private AdmLocation admLocation;
 
     public EmbdAddress() {
     }
@@ -53,14 +47,6 @@ public class EmbdAddress implements Serializable {
 
     public void setVillage(String village) {
         this.village = village;
-    }
-
-    public AdmLocation getAdmLocation() {
-        return admLocation;
-    }
-
-    public void setAdmLocation(AdmLocation admLocation) {
-        this.admLocation = admLocation;
     }
 
     public String getHouseNo() {

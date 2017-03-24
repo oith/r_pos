@@ -5,9 +5,7 @@ import org.apache.commons.io.IOUtils;
 import org.reflection.exception.ObjectNotFoundException;
 import org.reflection.model.auth.AuthUser;
 import org.reflection.model.com.AdmCodeDef;
-import org.reflection.model.com.AdmMenuItem;
 import org.reflection.service.AdmCodeDefService;
-import org.reflection.service.AdmMenuItemService;
 import org.reflection.service.auth.AuthUserExt;
 import org.reflection.service.auth.AuthUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +27,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.annotation.PostConstruct;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import java.awt.*;
@@ -68,18 +65,9 @@ public abstract class _BaseController {
     @Autowired
     protected MessageSource messageSource;
     @Autowired
-    private AdmMenuItemService admMenuItemService;
-    @Autowired
     private AuthUserService authUserService;
     @Autowired
     private AdmCodeDefService admCodeDefService;
-
-    @PostConstruct
-    public void init() {
-        for (AdmMenuItem admMenuItem : admMenuItemService.findAll()) {
-            MENU_CODE_MAP.put(admMenuItem.getUrlPath(), admMenuItem.getCode().toUpperCase());
-        }
-    }
 
     @InitBinder
     public void initBinder(WebDataBinder webDataBinder) {

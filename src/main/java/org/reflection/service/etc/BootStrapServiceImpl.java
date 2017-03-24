@@ -5,7 +5,6 @@ import org.reflection.model.com.*;
 import org.reflection.model.com.enums.*;
 import org.reflection.model.com.enums.Currency;
 import org.reflection.model.com.enums.Locale;
-import org.reflection.repositories.AdmMenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,8 +20,6 @@ public class BootStrapServiceImpl implements BootStrapService {
 
     @Autowired
     private EntityManagerFactory entityManagerFactory;
-    @Autowired
-    private AdmMenuRepository admMenuRepository;
 
     private static Date getDate(String fdf, String form) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(form);
@@ -57,132 +54,6 @@ public class BootStrapServiceImpl implements BootStrapService {
         }
 
         return uuu;
-    }
-
-    @Override
-    public void dummyMenuData(SortedSet<String> list) {
-
-        long ff = admMenuRepository.count();
-        if (ff > 0) {
-            return;
-        }
-
-        Map<String, AdmSubModule> smenus = new LinkedHashMap<>();
-        for (String url : list) {
-            String dn = getUrl0Name(url);
-            smenus.put(dn, null);
-        }
-
-        EntityManager em = entityManagerFactory.createEntityManager();
-
-//        try {
-//            em.getTransaction().begin();
-//            int koto = em.createQuery("DELETE FROM " + AdmMenuItem.class.getSimpleName()).executeUpdate();
-//            em.getTransaction().commit();
-//            System.out.println("macsay: ok db menu drop: " + koto);
-//        } catch (Exception e) {
-//            System.out.println("macsay: err db menu drop: " + e);
-//            if (em.getTransaction().isActive()) {
-//                em.getTransaction().rollback();
-//            }
-//        }
-        AdmModule admModuleAdm = null;
-        try {
-            em.getTransaction().begin();
-
-            admModuleAdm = new AdmModule("ADM", "Admin");
-            AdmModule admModuleHcm = new AdmModule("HCM", "Human Capital Management");
-            AdmModule admModuleAfc = new AdmModule("AFC", "Accounts and Finance Control");
-            AdmModule admModulePos = new AdmModule("POS", "Point of Sale");
-
-            em.persist(admModuleAdm);
-            em.persist(admModuleHcm);
-            em.persist(admModuleAfc);
-            em.persist(admModulePos);
-
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            System.out.println("macsay: err fastModuleGen: " + e);
-            //e.printStackTrace();
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-        }
-
-        try {
-            em.getTransaction().begin();
-
-            System.out.println("admModuleAdm: " + admModuleAdm);
-
-            for (String smenu : smenus.keySet()) {
-                if (smenu != null) {
-                    AdmSubModule admSubModulex = new AdmSubModule(smenu.toUpperCase(), smenu, admModuleAdm);
-                    em.persist(admSubModulex);
-                    smenus.put(smenu, admSubModulex);
-                }
-            }
-
-            int aa = 1;
-
-            for (String url : list) {
-                String dnReal = getUrl0Name(url);
-                String dn = null;
-
-                try {
-                    dn = url.substring(1, url.lastIndexOf("index") - 1);
-                } catch (Exception e) {
-                    //System.out.println("hhhhhhhhhhhhhhhh" + e + " bb: " + string);
-                }
-
-                if (dn == null || dn.isEmpty()) {
-                    continue;
-                }
-
-                String showTitle = getShowTitle(dn);
-
-                AdmSubModule admSubModule = smenus.get(dnReal);
-
-                String code4Digit = String.format("%3s", aa).replace(' ', '0');// 0001
-
-                AdmMenu admMenu = new AdmMenu("m" + code4Digit, showTitle);
-                admMenu.setAdmSubModule(admSubModule);
-                admMenu.setIsExternal(Boolean.TRUE);
-                admMenu.setIsOpenInNewTab(Boolean.TRUE);
-                em.persist(admMenu);
-
-                AdmMenuItem admMenuItem1 = new AdmMenuItem("l" + code4Digit, "List " + showTitle, admMenu,
-                        Boolean.FALSE, aa % 3 == 0, "/" + dn + "/index", "fa fa-bell");
-                admMenuItem1.setAdmSubModule(admSubModule);
-                em.persist(admMenuItem1);
-
-                AdmMenuItem admMenuItem2 = new AdmMenuItem("c" + code4Digit, "Create " + showTitle, admMenu,
-                        Boolean.FALSE, aa % 3 == 0, "/" + dn + "/create", "fa fa-list");
-                admMenuItem2.setAdmSubModule(admSubModule);
-                em.persist(admMenuItem2);
-
-                AdmMenuPattern mm = new AdmMenuPattern(MenuOrientation.MENU_TOP, admMenu);
-                em.persist(mm);
-                AdmMenuPattern mm1 = new AdmMenuPattern(MenuOrientation.MENU_TOP, admMenuItem1);
-                em.persist(mm1);
-                AdmMenuPattern mm2 = new AdmMenuPattern(MenuOrientation.MENU_TOP, admMenuItem2);
-                em.persist(mm2);
-
-                aa++;
-                System.out.println("aaaaaaa" + aa);
-            }
-
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            javax.persistence.RollbackException hhhh = (javax.persistence.RollbackException) e;
-            String pop = hhhh.getMessage();
-            System.out.println("macsay: err fastMenuGen: " + e + " pop: " + pop);
-            e.printStackTrace();
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-        } finally {
-            em.close();
-        }
     }
 
     @Override

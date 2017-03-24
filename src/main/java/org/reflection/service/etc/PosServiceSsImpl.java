@@ -1,5 +1,6 @@
 package org.reflection.service.etc;
 
+import org.reflection.dto._PosProductLineDTO;
 import org.reflection.model.auth.AuthUser;
 import org.reflection.model.com.EmbdAuditable;
 import org.reflection.model.pos.*;
@@ -19,7 +20,7 @@ import java.util.*;
 //@Transactional(readOnly = true)
 public class PosServiceSsImpl implements PosServiceSs {
 
-    private final static Map<String, Map<String, Set<PosProductLine>>> MAPS = new LinkedHashMap();
+    private final static Map<String, Map<String, Set<_PosProductLineDTO>>> MAPS = new LinkedHashMap();
     @Autowired
     private EntityManagerFactory entityManagerFactory;
     @Autowired
@@ -164,8 +165,8 @@ public class PosServiceSsImpl implements PosServiceSs {
             sid = "mac";
         }
 
-        Map<String, Set<PosProductLine>> MAP_UUID_MAP_PROD_QTY = MAPS.get(sid);
-        Set<PosProductLine> currSalesMaps = MAP_UUID_MAP_PROD_QTY.get(uuid);
+        Map<String, Set<_PosProductLineDTO>> MAP_UUID_MAP_PROD_QTY = MAPS.get(sid);
+        Set<_PosProductLineDTO> currSalesMaps = MAP_UUID_MAP_PROD_QTY.get(uuid);
 
         if (currSalesMaps == null || currSalesMaps.isEmpty()) {
             Map<String, String> ret = new LinkedHashMap<>();
@@ -189,12 +190,12 @@ public class PosServiceSsImpl implements PosServiceSs {
 
         Set<PosSalesDetail> slsDetails = new LinkedHashSet();
         Double amount = 0d;
-        for (PosProductLine posProductLine : currSalesMaps) {
+        for (_PosProductLineDTO posProductLineDTO : currSalesMaps) {
             slsDetails.add(new PosSalesDetail(slsMaster,
-                    posProductLine.getPosProduct(),
-                    posProductLine.getQuantity(),
-                    posProductLine.getUnitPrice()));
-            amount += posProductLine.getQuantity() * posProductLine.getUnitPrice();
+                    posProductLineDTO.getPosProduct(),
+                    posProductLineDTO.getQuantity(),
+                    posProductLineDTO.getUnitPrice()));
+            amount += posProductLineDTO.getQuantity() * posProductLineDTO.getUnitPrice();
         }
 
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -264,8 +265,8 @@ public class PosServiceSsImpl implements PosServiceSs {
             sid = "mac";
         }
 
-        Map<String, Set<PosProductLine>> MAP_UUID_MAP_PROD_QTY = MAPS.get(sid);
-        Set<PosProductLine> currSalesMaps = MAP_UUID_MAP_PROD_QTY.get(uuid);
+        Map<String, Set<_PosProductLineDTO>> MAP_UUID_MAP_PROD_QTY = MAPS.get(sid);
+        Set<_PosProductLineDTO> currSalesMaps = MAP_UUID_MAP_PROD_QTY.get(uuid);
 
         if (currSalesMaps == null || currSalesMaps.isEmpty()) {
             Map<String, String> ret = new LinkedHashMap<>();
@@ -289,7 +290,7 @@ public class PosServiceSsImpl implements PosServiceSs {
 
         Set<PosSalesDetail> slsDetails = new LinkedHashSet();
         Double amount = 0d;
-        for (PosProductLine posProduct : currSalesMaps) {
+        for (_PosProductLineDTO posProduct : currSalesMaps) {
             slsDetails.add(new PosSalesDetail(slsMaster,
                     posProduct.getPosProduct(),
                     posProduct.getQuantity(),
@@ -378,7 +379,7 @@ public class PosServiceSsImpl implements PosServiceSs {
             sid = "mac";
         }
 
-        Map<String, Set<PosProductLine>> MAP_UUID_MAP_PROD_QTY = MAPS.get(sid);
+        Map<String, Set<_PosProductLineDTO>> MAP_UUID_MAP_PROD_QTY = MAPS.get(sid);
 
         System.out.println("maps:::237:" + MAP_UUID_MAP_PROD_QTY);
         if (MAP_UUID_MAP_PROD_QTY != null && MAP_UUID_MAP_PROD_QTY.containsKey(uuid)) {
@@ -412,7 +413,7 @@ public class PosServiceSsImpl implements PosServiceSs {
         return null;
     }
 
-    public PosProductLine getProductLoad(String sidx, String uuid, BigInteger product) {
+    public _PosProductLineDTO getProductLoad(String sidx, String uuid, BigInteger product) {
 
         String sid = null;
         try {
@@ -421,12 +422,12 @@ public class PosServiceSsImpl implements PosServiceSs {
             sid = "mac";
         }
 
-        Map<String, Set<PosProductLine>> MAP_UUID_MAP_PROD_QTY = MAPS.get(sid);
+        Map<String, Set<_PosProductLineDTO>> MAP_UUID_MAP_PROD_QTY = MAPS.get(sid);
 
-        Set<PosProductLine> kkkp = MAP_UUID_MAP_PROD_QTY.get(uuid);
+        Set<_PosProductLineDTO> kkkp = MAP_UUID_MAP_PROD_QTY.get(uuid);
 
-        PosProductLine ert = null;
-        for (PosProductLine mm : kkkp) {
+        _PosProductLineDTO ert = null;
+        for (_PosProductLineDTO mm : kkkp) {
             if (mm.getPosProduct().getId().equals(product)) {
                 ert = mm;
                 break;
@@ -478,7 +479,7 @@ public class PosServiceSsImpl implements PosServiceSs {
             MAPS.put(sid, new LinkedHashMap<>());
         }
 
-        Map<String, Set<PosProductLine>> MAP_UUID_MAP_PROD_QTY = MAPS.get(sid);
+        Map<String, Set<_PosProductLineDTO>> MAP_UUID_MAP_PROD_QTY = MAPS.get(sid);
 
         if (MAP_UUID_MAP_PROD_QTY == null) {
             MAP_UUID_MAP_PROD_QTY = new LinkedHashMap<>();
@@ -488,10 +489,10 @@ public class PosServiceSsImpl implements PosServiceSs {
             MAP_UUID_MAP_PROD_QTY.put(uuid, new LinkedHashSet<>());
         }
 
-        Set<PosProductLine> currSalesMaps = MAP_UUID_MAP_PROD_QTY.get(uuid);
+        Set<_PosProductLineDTO> currSalesMaps = MAP_UUID_MAP_PROD_QTY.get(uuid);
 
-        PosProductLine pppx = null;
-        for (PosProductLine ppp : currSalesMaps) {
+        _PosProductLineDTO pppx = null;
+        for (_PosProductLineDTO ppp : currSalesMaps) {
 
             if (ppp.getPosProduct().getId().equals(productId)) {
                 pppx = ppp;
@@ -500,7 +501,7 @@ public class PosServiceSsImpl implements PosServiceSs {
         }
 
         if (pppx == null) {
-            pppx = new PosProductLine();
+            pppx = new _PosProductLineDTO();
             pppx.setPosProduct(pp);
             pppx.setUnitPrice(unitPrice);
             pppx.setQuantity(quantity);
@@ -519,31 +520,31 @@ public class PosServiceSsImpl implements PosServiceSs {
         return addProductActionSts(isNative, currSalesMaps);
     }
 
-    private Map<String, String> addProductActionSts(boolean isNative, Set<PosProductLine> currSalesMaps) {
+    private Map<String, String> addProductActionSts(boolean isNative, Set<_PosProductLineDTO> currSalesMaps) {
         StringBuilder salesLines = new StringBuilder();
         Double salesTotal = 0d;
         int cnt = 1;
 
-        ArrayList<PosProductLine> yyy = new ArrayList(currSalesMaps);
+        ArrayList<_PosProductLineDTO> yyy = new ArrayList(currSalesMaps);
         Collections.reverse(yyy);
 
-        for (PosProductLine posProductLine : yyy) {
+        for (_PosProductLineDTO posProductLineDTO : yyy) {
             salesLines.append("<tr>");
 
             String kkk =
 
-                    "<td><button class='btn btn-info' onclick='posProductLoad(" + posProductLine.getPosProduct().getId() + ")'><i class='fa fa-info-circle'></i>&nbsp;Load</button></td>"
-                            + "<td><button class='btn btn-danger' onclick='posProductOmit(" + posProductLine.getPosProduct().getId() + ")'><i class='fa fa-trash-o'></i>&nbsp;Omit</button></td>"
+                    "<td><button class='btn btn-info' onclick='posProductLoad(" + posProductLineDTO.getPosProduct().getId() + ")'><i class='fa fa-info-circle'></i>&nbsp;Load</button></td>"
+                            + "<td><button class='btn btn-danger' onclick='posProductOmit(" + posProductLineDTO.getPosProduct().getId() + ")'><i class='fa fa-trash-o'></i>&nbsp;Omit</button></td>"
                             + "<td>" + cnt + "</td>"
-                            + "<td>" + posProductLine.getPosProduct().getCode() + "</td>"
-                            + "<td>" + (isNative ? posProductLine.getPosProduct().getFullNameNative() : posProductLine.getPosProduct().getFullName()) + "</td>"
-                            + "<td class='right'>" + posProductLine.getUnitPrice() + "</td>"
-                            + "<td class='right'>" + posProductLine.getQuantity() + "</td>"
-                            + "<td class='right'>" + posProductLine.getQuantity() * posProductLine.getUnitPrice() + "</td>";
+                            + "<td>" + posProductLineDTO.getPosProduct().getCode() + "</td>"
+                            + "<td>" + (isNative ? posProductLineDTO.getPosProduct().getFullNameNative() : posProductLineDTO.getPosProduct().getFullName()) + "</td>"
+                            + "<td class='right'>" + posProductLineDTO.getUnitPrice() + "</td>"
+                            + "<td class='right'>" + posProductLineDTO.getQuantity() + "</td>"
+                            + "<td class='right'>" + posProductLineDTO.getQuantity() * posProductLineDTO.getUnitPrice() + "</td>";
 
             salesLines.append(kkk);
             salesLines.append("</tr>");
-            salesTotal += posProductLine.getQuantity() * posProductLine.getUnitPrice();
+            salesTotal += posProductLineDTO.getQuantity() * posProductLineDTO.getUnitPrice();
             cnt++;
         }
 
@@ -558,7 +559,7 @@ public class PosServiceSsImpl implements PosServiceSs {
         return ret;
     }
 
-    public Map<String, Set<PosProductLine>> index(String sidx) {
+    public Map<String, Set<_PosProductLineDTO>> index(String sidx) {
 
         String sid = null;
         try {
@@ -571,7 +572,7 @@ public class PosServiceSsImpl implements PosServiceSs {
             MAPS.put(sid, new LinkedHashMap());
         }
 
-        Map<String, Set<PosProductLine>> jjj = MAPS.get(sid);
+        Map<String, Set<_PosProductLineDTO>> jjj = MAPS.get(sid);
 
         if (jjj.size() < 3) {
             String uuid = UUID.randomUUID().toString();

@@ -19,10 +19,6 @@ public class AdmSubModule extends AbstractAdm implements IDetail {
 
     @OneToMany(mappedBy = "admSubModule")
     @OrderBy(value = "slNo, fullName")
-    private Set<AdmMenuCommon> admMenuCommons = new TreeSet<>();
-
-    @OneToMany(mappedBy = "admSubModule")
-    @OrderBy(value = "slNo, fullName")
     private Set<AdmProcess> admProcesss = new TreeSet<>();
 
     @OneToMany(mappedBy = "admSubModule")
@@ -70,14 +66,6 @@ public class AdmSubModule extends AbstractAdm implements IDetail {
 
     public void setDisplayIconClass(String displayIconClass) {
         this.displayIconClass = displayIconClass;
-    }
-
-    public Set<AdmMenuCommon> getAdmMenuCommons() {
-        return admMenuCommons;
-    }
-
-    public void setAdmMenuCommons(Set<AdmMenuCommon> admMenuCommons) {
-        this.admMenuCommons = admMenuCommons;
     }
 
     @Override

@@ -9,7 +9,7 @@ import java.util.Set;
 @Entity
 @Table(name = "POS_ADJUSTMENT_MST")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class PosAdjustmentMaster extends AbstractTransactableAmount {
+public class PosAdjustmentMaster extends PosAbstractMaster {
 
     @OneToMany(mappedBy = "posAdjustmentMaster")
     private Set<PosAdjustmentDetail> posAdjustmentDetails = new LinkedHashSet<>();
@@ -18,7 +18,7 @@ public class PosAdjustmentMaster extends AbstractTransactableAmount {
     }
 
     public PosAdjustmentMaster(String code, AbstractTransactableAmount abstractTransactableAmount) {
-        super(abstractTransactableAmount);
+        //super(abstractTransactableAmount);
         this.setCode(code);
     }
 

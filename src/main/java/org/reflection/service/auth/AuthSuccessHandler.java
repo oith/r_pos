@@ -1,7 +1,6 @@
 package org.reflection.service.auth;
 
 import org.apache.commons.lang.LocaleUtils;
-import org.reflection.service.util.MenuGen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.Authentication;
@@ -48,9 +47,8 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 
         EntityManager em = entityManagerFactory.createEntityManager();
 
-        MenuGen gggj = new MenuGen(em, messageSource, current, contextPath, authUserExt.getMenuOrientation());
 
-        String sss = gggj.getMenu(authentication);
+        String sss = "";
 
         //System.out.println("menu>>>"+sss);
 //        for (AdmMenu admMenu : admMenuService.findAll()) {

@@ -1,12 +1,8 @@
 package org.reflection.service;
-/**
- * @author mac
- */
 
 import org.hibernate.Hibernate;
 import org.reflection.dto._SearchDTO;
 import org.reflection.exception.AdmSubModuleNotFoundException;
-import org.reflection.model.com.AdmMenuCommon;
 import org.reflection.model.com.AdmProcess;
 import org.reflection.model.com.AdmReport;
 import org.reflection.model.com.AdmSubModule;
@@ -15,9 +11,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.math.BigInteger;
-
 
 @Service("admSubModuleService")
 @Transactional(readOnly = true)
@@ -61,18 +55,6 @@ public class AdmSubModuleServiceImpl implements AdmSubModuleService {
 
         copyProperties(copied, admSubModule);
 
-        for (AdmMenuCommon currDet : admSubModuleOrginal.getAdmMenuCommons()) {
-
-            AdmMenuCommon det = new AdmMenuCommon();
-            BeanUtils.copyProperties(currDet, det);
-            det.setId(null);
-
-            det.setAdmSubModule(admSubModule);
-            if (admSubModule.getAdmMenuCommons() == null) {
-                admSubModule.setAdmMenuCommons(new java.util.LinkedHashSet());
-            }
-            admSubModule.getAdmMenuCommons().add(det);
-        }
         for (AdmProcess currDet : admSubModuleOrginal.getAdmProcesss()) {
 
             AdmProcess det = new AdmProcess();
@@ -111,7 +93,6 @@ public class AdmSubModuleServiceImpl implements AdmSubModuleService {
         to.setDescription(from.getDescription());
         to.setAdmModule(from.getAdmModule());
         to.setDisplayIconClass(from.getDisplayIconClass());
-        to.setAdmMenuCommons(from.getAdmMenuCommons());
         to.setAdmProcesss(from.getAdmProcesss());
         to.setAdmReports(from.getAdmReports());
 
@@ -124,7 +105,6 @@ public class AdmSubModuleServiceImpl implements AdmSubModuleService {
         if (admSubModule == null) {
             throw new AdmSubModuleNotFoundException();
         }
-        Hibernate.initialize(admSubModule.getAdmMenuCommons());
         Hibernate.initialize(admSubModule.getAdmProcesss());
         Hibernate.initialize(admSubModule.getAdmReports());
 
@@ -137,7 +117,6 @@ public class AdmSubModuleServiceImpl implements AdmSubModuleService {
         Iterable<AdmSubModule> admSubModules = admSubModuleRepository.findAll();
 
         for (AdmSubModule admSubModule : admSubModules) {
-            Hibernate.initialize(admSubModule.getAdmMenuCommons());
             Hibernate.initialize(admSubModule.getAdmProcesss());
             Hibernate.initialize(admSubModule.getAdmReports());
 

@@ -2,7 +2,7 @@ package org.reflection.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.reflection.model.pos.PosProduct;
-import org.reflection.service.etc.PosProductLine;
+import org.reflection.dto._PosProductLineDTO;
 import org.reflection.service.etc.PosServiceSs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -45,8 +45,8 @@ public class _PosSsController extends _BaseController {
             @RequestParam(value = "uuid") String uuid,
             @RequestParam(value = "product") BigInteger product
     ) {
-        PosProductLine posProductLine = posServiceSs.getProductLoad(sid, uuid, product);
-        return jesner(posProductLine);
+        _PosProductLineDTO posProductLineDTO = posServiceSs.getProductLoad(sid, uuid, product);
+        return jesner(posProductLineDTO);
     }
 
     @GetMapping(value = "/saveAndPrint", produces = "text/plain;charset=utf-8")
@@ -133,7 +133,7 @@ public class _PosSsController extends _BaseController {
         String sid = RequestContextHolder.currentRequestAttributes().getSessionId();
         model.addAttribute("sid", sid);
 
-        Map<String, Set<PosProductLine>> jjj = posServiceSs.index(sid);
+        Map<String, Set<_PosProductLineDTO>> jjj = posServiceSs.index(sid);
 
         List ff = new ArrayList(jjj.keySet());
         model.addAttribute("uuid", jjj.get(ff.get(0)));

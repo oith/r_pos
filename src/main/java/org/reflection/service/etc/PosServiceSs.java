@@ -1,5 +1,6 @@
 package org.reflection.service.etc;
 
+import org.reflection.dto._PosProductLineDTO;
 import org.reflection.model.pos.PosProduct;
 
 import java.math.BigInteger;
@@ -39,7 +40,7 @@ public interface PosServiceSs {
             Double quantity
     );
 
-    public Map<String, Set<PosProductLine>> index(String sid);
+    public Map<String, Set<_PosProductLineDTO>> index(String sid);
 
-    public PosProductLine getProductLoad(String sid, String uuid, BigInteger product);
+    public _PosProductLineDTO getProductLoad(String sid, String uuid, BigInteger product);
 }
