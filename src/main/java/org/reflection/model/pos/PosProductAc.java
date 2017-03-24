@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.math.BigInteger;
 
 @Entity
-@Table(name = "POS_PRODUCT_AC")
+@Table(name = "POS_PRODUCT_AC", uniqueConstraints = {@UniqueConstraint(columnNames = {"AC_TYPE","CODE"})})
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class PosProductAc implements IAbstract, ICodeable, INameable {
 
@@ -19,11 +19,11 @@ public class PosProductAc implements IAbstract, ICodeable, INameable {
     @Version
     private Integer version;
 
-    @Column(name = "CODE", length = 10, nullable = false, unique = true)
+    @Column(name = "CODE", length = 10, nullable = false)
     private String code;
-    @Column(name = "FULL_NAME", length = 100, nullable = false)
+    @Column(name = "FULL_NAME", length = 30, nullable = false)
     private String fullName;
-    @Column(name = "FULL_NAME_NATIVE", length = 255, nullable = false)
+    @Column(name = "FULL_NAME_NATIVE", length = 50, nullable = false)
     private String fullNameNative;
 
     @Enumerated(EnumType.STRING)
