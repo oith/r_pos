@@ -9,7 +9,7 @@
 <spring:message code='admReports' text='Adm Reports'/> | <a href='${context}/admReport/create'><spring:message
         code='default.create.link.label'/>&NonBreakingSpace;<spring:message code='AdmReport' text='Adm Report'/></a>
 
-<c:if test='${not empty admSubModule.admReports}'>
+<c:if test='${not empty admModule.admReports}'>
     <div class='box-body table-responsive no-padding'>
         <table class='table table-bordered table-striped table-hover table-condensed dt-responsive display nowrap th-center'>
             <thead>
@@ -28,7 +28,7 @@
             <tbody>
             <spring:message code='default.button.delete.confirm.message' text='Are you sure to delete?'
                             var='confirmToDelete'/>
-            <c:forEach items='${admSubModule.admReports}' var='admReports' varStatus='loopStatus'>
+            <c:forEach items='${admModule.admReports}' var='admReports' varStatus='loopStatus'>
                 <tr class='${loopStatus.index % 2 == 0 ? 'odd' : 'even'}'>
                     <td><a href='${context}/admReport/show/<c:out value='${admReports.id}'/>'><spring:message
                             code='show.link.label'/></a></td>

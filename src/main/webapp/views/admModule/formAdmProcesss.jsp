@@ -16,8 +16,8 @@
         </a>
 
         <c:choose>
-            <c:when test="${admSubModule.admProcesss.size() > 0}">
-                <c:forEach items='${admSubModule.admProcesss}' var='admProcesss' varStatus='varStatus'>
+            <c:when test="${admModule.admProcesss.size() > 0}">
+                <c:forEach items='${admModule.admProcesss}' var='admProcesss' varStatus='varStatus'>
                     <div class="box box-info childOneDetails">
                         <div class="box-body">
 

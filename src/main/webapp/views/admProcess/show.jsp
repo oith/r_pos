@@ -122,13 +122,13 @@
                                     </li>
                                 </c:if>
 
-                                <c:if test='${admProcess.admSubModule!=null}'>
+                                <c:if test='${admProcess.admModule!=null}'>
                                     <li class='fieldcontain first_item'>
                                         <span id='title' class='property-label'>
-                                            <spring:message code='admSubModule' text='Adm Sub Module'/>: 
+                                            <spring:message code='admModule' text='Adm Sub Module'/>:
                                         </span>
-                                        <span class='property-value' aria-labelledby='admSubModule'>
-                                            <c:out value='${admProcess.admSubModule}'/>
+                                        <span class='property-value' aria-labelledby='admModule'>
+                                            <c:out value='${admProcess.admModule}'/>
                                         </span>
                                     </li>
                                 </c:if>

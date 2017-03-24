@@ -55,7 +55,7 @@
                                 <th><spring:message code='isActive' text='Is Active'/></th>
                                 <th><spring:message code='slNo' text='Sl No'/></th>
                                 <th><spring:message code='description' text='Description'/></th>
-                                <th><spring:message code='admSubModule' text='Adm Sub Module'/></th>
+                                <th><spring:message code='admModule' text='Adm Sub Module'/></th>
                                 <th><spring:message code='cmd' text='Cmd'/></th>
                                 <th><spring:message code='query' text='Query'/></th>
                                 <th><spring:message code='queryAlias' text='Query Alias'/></th>
@@ -74,7 +74,7 @@
                                             <td class='center'><c:if test='${admProcess.isActive}'><spring:message code='default.boolean.true' text='YES'/></c:if><c:if test='${!admProcess.isActive}'><spring:message code='default.boolean.false' text='NO'/></c:if></td>
                                             <td class='right'><c:out value='${admProcess.slNo}'/></td>
                                             <td><c:out value='${admProcess.description}'/></td>
-                                            <td><c:out value='${admProcess.admSubModule}'/></td>
+                                            <td><c:out value='${admProcess.admModule}'/></td>
                                             <td><c:out value='${admProcess.cmd}'/></td>
                                             <td><c:out value='${admProcess.query}'/></td>
                                             <td><c:out value='${admProcess.queryAlias}'/></td>

@@ -119,11 +119,11 @@
     </div>
     <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
         <div class='form-group'>
-            <form:label class='required' path='admSubModule'><spring:message code='admSubModule' text='Adm Sub Module'/></form:label>
-            <form:select class='form-control' path='admSubModule' name='admSubModule' id='admSubModule' required='true' >
-                <form:options items='${admSubModules}' itemValue='id'/>
+            <form:label class='required' path='admModule'><spring:message code='admModule' text='Adm Sub Module'/></form:label>
+            <form:select class='form-control' path='admModule' name='admModule' id='admModule' required='true' >
+                <form:options items='${admModules}' itemValue='id'/>
             </form:select>
-            <form:errors path='admSubModule' cssClass='error' element='div'/>
+            <form:errors path='admModule' cssClass='error' element='div'/>
         </div>
     </div>
     <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>

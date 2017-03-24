@@ -55,7 +55,7 @@
                                 <th><spring:message code='isActive' text='Is Active'/></th>
                                 <th><spring:message code='slNo' text='Sl No'/></th>
                                 <th><spring:message code='description' text='Description'/></th>
-                                <th><spring:message code='admSubModule' text='Adm Sub Module'/></th>
+                                <th><spring:message code='admModule' text='Adm Sub Module'/></th>
                                 <th><spring:message code='fileName' text='File Name'/></th>
                                 <th><spring:message code='supportFormats' text='Support Formats'/></th>
 
@@ -72,7 +72,7 @@
                                             <td class='center'><c:if test='${admReport.isActive}'><spring:message code='default.boolean.true' text='YES'/></c:if><c:if test='${!admReport.isActive}'><spring:message code='default.boolean.false' text='NO'/></c:if></td>
                                             <td class='right'><c:out value='${admReport.slNo}'/></td>
                                             <td><c:out value='${admReport.description}'/></td>
-                                            <td><c:out value='${admReport.admSubModule}'/></td>
+                                            <td><c:out value='${admReport.admModule}'/></td>
                                             <td><c:out value='${admReport.fileName}'/></td>
                                             <td class='center'><c:out value='${admReport.supportFormats}'/></td>
 

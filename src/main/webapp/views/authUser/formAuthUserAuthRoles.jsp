@@ -16,8 +16,8 @@
         </a>
 
         <c:choose>
-            <c:when test="${authUser.authUserAuthRoles.size() > 0}">
-                <c:forEach items='${authUser.authUserAuthRoles}' var='authUserAuthRoles' varStatus='varStatus'>
+            <c:when test="${authUser.authRoles.size() > 0}">
+                <c:forEach items='${authUser.authRoles}' var='authRoles' varStatus='varStatus'>
                     <div class="box box-info childOneDetails">
                         <div class="box-body">
 

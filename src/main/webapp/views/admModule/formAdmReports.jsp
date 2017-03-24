@@ -16,12 +16,12 @@
         </a>
 
         <c:choose>
-            <c:when test="${admModule.admSubModules.size() > 0}">
-                <c:forEach items='${admModule.admSubModules}' var='admSubModules' varStatus='varStatus'>
+            <c:when test="${admModule.admReports.size() > 0}">
+                <c:forEach items='${admModule.admReports}' var='admReports' varStatus='varStatus'>
                     <div class="box box-info childOneDetails">
                         <div class="box-body">
 
-                            <jsp:include page='form_AdmSubModules.jsp'>
+                            <jsp:include page='form_AdmReports.jsp'>
                                 <jsp:param name="idx" value="${varStatus.index}"/>
                             </jsp:include>
 
@@ -37,7 +37,7 @@
                 <div class="box box-info childOneDetails">
                     <div class="box-body">
 
-                        <jsp:include page='form_AdmSubModules.jsp'>
+                        <jsp:include page='form_AdmReports.jsp'>
                             <jsp:param name="idx" value="0"/>
                         </jsp:include>
 

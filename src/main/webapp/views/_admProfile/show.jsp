@@ -292,15 +292,8 @@
 
                     </ol>
                     <div>
-                        <jsp:include page='authUserAuthQuestions.jsp'/>
+                        <jsp:include page='authRoles.jsp'/>
                     </div>
-                    <div>
-                        <jsp:include page='authUserAuthRoles.jsp'/>
-                    </div>
-                    <div>
-                        <jsp:include page='authUserEnvKeys.jsp'/>
-                    </div>
-
                 </fieldset>
                 <!--.show-page-->
             </div>
