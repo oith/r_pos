@@ -107,9 +107,13 @@ public class AuthUser extends Abstract {
     @Column(name = "AFTER_LOGIN_URL", length = 100)
     private String afterLoginUrl;
 
-    @OneToMany(mappedBy = "authUser", fetch = FetchType.EAGER)
-    private Set<AuthUserAuthRole> authUserAuthRoles = new LinkedHashSet<>();
-
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "AUTH_USER_AUTH_ROLE",
+            joinColumns = {
+                    @JoinColumn(name = "AUTH_USER_ID")},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "AUTH_ROLE_ID")})
+    private Set<AuthRole> authRoles = new LinkedHashSet();
 
     public AuthUser() {
     }
@@ -217,7 +221,6 @@ public class AuthUser extends Abstract {
     public void setFavorite(String favorite) {
         this.favorite = favorite;
     }
-
 
 
     public Boolean getOpenInNewPage() {
@@ -340,12 +343,12 @@ public class AuthUser extends Abstract {
         this.afterLoginUrl = afterLoginUrl;
     }
 
-    public Set<AuthUserAuthRole> getAuthUserAuthRoles() {
-        return authUserAuthRoles;
+    public Set<AuthRole> getAuthRoles() {
+        return authRoles;
     }
 
-    public void setAuthUserAuthRoles(Set<AuthUserAuthRole> authUserAuthRoles) {
-        this.authUserAuthRoles = authUserAuthRoles;
+    public void setAuthRoles(Set<AuthRole> authRoles) {
+        this.authRoles = authRoles;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package org.reflection.model.com;
 
 import com.oith.annotation.MacCodable;
+import org.hibernate.validator.constraints.Range;
 import org.reflection.model.com.enums.ReportFormat;
 
 import javax.persistence.*;
@@ -11,11 +12,19 @@ import java.util.Set;
 @Entity
 @Table(name = "ADM_REPORT")
 @MacCodable(id = "id", code = "code", caption = "fullName")
-public class AdmReport extends AbstractAdm {
+public class AdmReport extends AbstractLookable {
 
-    @JoinColumn(name = "ADM_SUB_MODULE_ID", nullable = false)
+    @Column(name = "IS_ACTIVE")
+    private Boolean isActive = Boolean.TRUE;
+    @Column(name = "SL_NO")
+    @Range(min = 0, max = 100)
+    private Byte slNo;
+    @Column(name = "DESCRIPTION", length = 500)
+    private String description;
+
+    @JoinColumn(name = "ADM_MODULE_ID", nullable = false)
     @ManyToOne(optional = false)
-    private AdmSubModule admSubModule;
+    private AdmModule admModule;
     @NotNull
     @Size(min = 3, max = 30)
     @Column(name = "FILE_NAME", unique = true)
@@ -35,14 +44,6 @@ public class AdmReport extends AbstractAdm {
     private Set<ReportFormat> supportFormats;
 
     public AdmReport() {
-    }
-
-    public AdmSubModule getAdmSubModule() {
-        return admSubModule;
-    }
-
-    public void setAdmSubModule(AdmSubModule admSubModule) {
-        this.admSubModule = admSubModule;
     }
 
     public String getFileName() {
@@ -69,4 +70,39 @@ public class AdmReport extends AbstractAdm {
         this.supportFormats = supportFormats;
     }
 
+    @Override
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    @Override
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    @Override
+    public Byte getSlNo() {
+        return slNo;
+    }
+
+    @Override
+    public void setSlNo(Byte slNo) {
+        this.slNo = slNo;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public AdmModule getAdmModule() {
+        return admModule;
+    }
+
+    public void setAdmModule(AdmModule admModule) {
+        this.admModule = admModule;
+    }
 }

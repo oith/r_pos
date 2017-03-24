@@ -77,11 +77,11 @@ public class _ReportCenterController extends _BaseController {
 
         if (moduleId == null) {
             for (AdmReport bbb : admReportService.findAll()) {
-                sb.append("<option value='").append(bbb.getId()).append("'>").append(bbb.getAdmSubModule()).append('-').append(bbb).append("</option>");
+                sb.append("<option value='").append(bbb.getId()).append("'>").append(bbb.getAdmModule()).append('-').append(bbb).append("</option>");
             }
         } else {
             for (AdmReport bbb : admReportService.findAll()) {
-                if (bbb.getAdmSubModule().getId().equals(moduleId)) {
+                if (bbb.getAdmModule().getId().equals(moduleId)) {
                     sb.append("<option value='").append(bbb.getId()).append("'>").append(bbb).append("</option>");
                 }
             }
@@ -124,7 +124,7 @@ public class _ReportCenterController extends _BaseController {
 
         List<_DualDTO> kk = new ArrayList();
         for (AdmReport bbb : admReportService.findAll()) {
-            _DualDTO bbbm = new _DualDTO(bbb.getId(), bbb.getAdmSubModule() + "-" + bbb);
+            _DualDTO bbbm = new _DualDTO(bbb.getId(), bbb.getAdmModule() + "-" + bbb);
             kk.add(bbbm);
         }
 

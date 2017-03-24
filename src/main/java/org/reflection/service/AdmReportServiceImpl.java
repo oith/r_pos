@@ -88,7 +88,7 @@ public class AdmReportServiceImpl implements AdmReportService {
         to.setIsActive(from.getIsActive());
         to.setSlNo(from.getSlNo());
         to.setDescription(from.getDescription());
-        to.setAdmSubModule(from.getAdmSubModule());
+        to.setAdmModule(from.getAdmModule());
         to.setFileName(from.getFileName());
         to.setAdmReportDetails(from.getAdmReportDetails());
         to.setSupportFormats(from.getSupportFormats());

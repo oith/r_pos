@@ -68,7 +68,7 @@ public class XmlFileUploadServiceImpl implements XmlFileUploadService {
 
                     Element eElement = (Element) nNode;
 
-                    Map<String, Object> map = new LinkedHashMap<>();
+                    Map<String, Object> map = new LinkedHashMap();
                     map.put("CODE", eElement.getAttribute("CODE"));
                     map.put("FULL_NAME", eElement.getElementsByTagName("FULL_NAME").item(0).getTextContent());
                     map.put("SALARY", Double.parseDouble(eElement.getElementsByTagName("SALARY").item(0).getTextContent()));

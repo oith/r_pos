@@ -11,8 +11,12 @@ import java.util.Set;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class PosAdjustmentMaster extends PosAbstractMaster {
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ADJUSTMENT_TYPE", length = 30, nullable = false)
+    private EmPosAdjustmentType emPosAdjustmentType;
+
     @OneToMany(mappedBy = "posAdjustmentMaster")
-    private Set<PosAdjustmentDetail> posAdjustmentDetails = new LinkedHashSet<>();
+    private Set<PosAdjustmentDetail> posAdjustmentDetails = new LinkedHashSet();
 
     public PosAdjustmentMaster() {
     }

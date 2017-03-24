@@ -184,7 +184,7 @@ public class AdmCodeDefController extends _BaseController {
         model.addAttribute(MODELS, admCodeDefs);
         model.addAttribute(SEARCH_CRITERIA, searchCriteria);
         
-        List<Integer> pages = new ArrayList<>();
+        List<Integer> pages = new ArrayList();
         for (int i = 1; i <= searchCriteria.getTotalPages(); i++) {
             pages.add(i);
         }
@@ -210,7 +210,7 @@ public class AdmCodeDefController extends _BaseController {
         model.addAttribute(MODELS, admCodeDefs);
         model.addAttribute(SEARCH_CRITERIA, searchCriteria);
     
-        List<Integer> pages = new ArrayList<>();
+        List<Integer> pages = new ArrayList();
         for (int i = 1; i <= searchCriteria.getTotalPages(); i++) {
             pages.add(i);
         }

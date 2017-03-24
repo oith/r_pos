@@ -189,7 +189,7 @@ public class AdmProcessDetailController extends _BaseController {
         model.addAttribute(MODELS, admProcessDetails);
         model.addAttribute(SEARCH_CRITERIA, searchCriteria);
         
-        List<Integer> pages = new ArrayList<>();
+        List<Integer> pages = new ArrayList();
         for (int i = 1; i <= searchCriteria.getTotalPages(); i++) {
             pages.add(i);
         }
@@ -215,7 +215,7 @@ public class AdmProcessDetailController extends _BaseController {
         model.addAttribute(MODELS, admProcessDetails);
         model.addAttribute(SEARCH_CRITERIA, searchCriteria);
     
-        List<Integer> pages = new ArrayList<>();
+        List<Integer> pages = new ArrayList();
         for (int i = 1; i <= searchCriteria.getTotalPages(); i++) {
             pages.add(i);
         }

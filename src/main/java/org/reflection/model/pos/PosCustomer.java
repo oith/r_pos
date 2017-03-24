@@ -15,7 +15,7 @@ public class PosCustomer extends PosProductAc {
     @MacImagable
     @Column(name = "PIC")
     private String pic;
-    @Column(name = "ADDRESS", length = 200)
+    @Column(name = "ADDRESS", length = 255)
     private String address;
 
     @Enumerated(EnumType.STRING)

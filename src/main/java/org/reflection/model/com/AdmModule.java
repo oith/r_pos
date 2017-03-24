@@ -8,7 +8,7 @@ import java.util.TreeSet;
 
 @Entity
 @Table(name = "ADM_MODULE")
-public class AdmModule extends AbstractAdm {
+public class AdmModule extends AbstractLookable {
 
     @Column(name = "IS_ACTIVE")
     private Boolean isActive = Boolean.TRUE;
@@ -20,7 +20,11 @@ public class AdmModule extends AbstractAdm {
 
     @OneToMany(mappedBy = "admModule")
     @OrderBy(value = "slNo, fullName")
-    private Set<AdmSubModule> admSubModules = new TreeSet<>();
+    private Set<AdmProcess> admProcesss = new TreeSet();
+
+    @OneToMany(mappedBy = "admModule")
+    @OrderBy(value = "slNo, fullName")
+    private Set<AdmReport> admReports = new TreeSet();
 
     public AdmModule() {
     }
@@ -53,12 +57,20 @@ public class AdmModule extends AbstractAdm {
         this.description = description;
     }
 
-    public Set<AdmSubModule> getAdmSubModules() {
-        return admSubModules;
+    public Set<AdmProcess> getAdmProcesss() {
+        return admProcesss;
     }
 
-    public void setAdmSubModules(Set<AdmSubModule> admSubModules) {
-        this.admSubModules = admSubModules;
+    public void setAdmProcesss(Set<AdmProcess> admProcesss) {
+        this.admProcesss = admProcesss;
+    }
+
+    public Set<AdmReport> getAdmReports() {
+        return admReports;
+    }
+
+    public void setAdmReports(Set<AdmReport> admReports) {
+        this.admReports = admReports;
     }
 
     @Override

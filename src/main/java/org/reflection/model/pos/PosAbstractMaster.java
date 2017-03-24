@@ -16,4 +16,11 @@ public abstract class PosAbstractMaster extends AbstractTransactableAmount {
     public PosAbstractMaster() {
     }
 
+    public PosBranch getPosBranch() {
+        return posBranch;
+    }
+
+    public void setPosBranch(PosBranch posBranch) {
+        this.posBranch = posBranch;
+    }
 }

@@ -88,7 +88,7 @@ public class AdmProcessServiceImpl implements AdmProcessService {
         to.setIsActive(from.getIsActive());
         to.setSlNo(from.getSlNo());
         to.setDescription(from.getDescription());
-        to.setAdmSubModule(from.getAdmSubModule());
+        to.setAdmModule(from.getAdmModule());
         to.setCmd(from.getCmd());
         to.setQuery(from.getQuery());
         to.setQueryAlias(from.getQueryAlias());

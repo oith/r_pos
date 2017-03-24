@@ -21,9 +21,9 @@ public class PosProductAc implements IAbstract, ICodeable, INameable {
 
     @Column(name = "CODE", length = 10, nullable = false)
     private String code;
-    @Column(name = "FULL_NAME", length = 30, nullable = false)
+    @Column(name = "FULL_NAME", length = 50, nullable = false)
     private String fullName;
-    @Column(name = "FULL_NAME_NATIVE", length = 50, nullable = false)
+    @Column(name = "FULL_NAME_NATIVE", length = 255, nullable = false)
     private String fullNameNative;
 
     @Enumerated(EnumType.STRING)

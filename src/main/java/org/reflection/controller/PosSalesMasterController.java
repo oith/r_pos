@@ -207,7 +207,7 @@ public class PosSalesMasterController extends _BaseController {
         model.addAttribute(MODELS, posSalesMasters);
         model.addAttribute(SEARCH_CRITERIA, searchCriteria);
         
-        List<Integer> pages = new ArrayList<>();
+        List<Integer> pages = new ArrayList();
         for (int i = 1; i <= searchCriteria.getTotalPages(); i++) {
             pages.add(i);
         }
@@ -233,7 +233,7 @@ public class PosSalesMasterController extends _BaseController {
         model.addAttribute(MODELS, posSalesMasters);
         model.addAttribute(SEARCH_CRITERIA, searchCriteria);
     
-        List<Integer> pages = new ArrayList<>();
+        List<Integer> pages = new ArrayList();
         for (int i = 1; i <= searchCriteria.getTotalPages(); i++) {
             pages.add(i);
         }

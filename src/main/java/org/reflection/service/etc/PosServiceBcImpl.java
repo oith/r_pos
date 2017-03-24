@@ -101,7 +101,7 @@ public class PosServiceBcImpl implements PosServiceBc {
         Map<PosProduct, Double> currSalesMaps = MAP_UUID_MAP_PROD_QTY.get(uuid);
 
         if (currSalesMaps == null || currSalesMaps.isEmpty()) {
-            Map<String, String> ret = new LinkedHashMap<>();
+            Map<String, String> ret = new LinkedHashMap();
 
             ret.put("status", "error");
             ret.put("message", "No Product choose to sale.");
@@ -110,7 +110,7 @@ public class PosServiceBcImpl implements PosServiceBc {
         }
 
         if (paidAmount == null || paidAmount <= 0) {
-            Map<String, String> ret = new LinkedHashMap<>();
+            Map<String, String> ret = new LinkedHashMap();
 
             ret.put("status", "error");
             ret.put("message", "Paid Amount not given.");
@@ -163,9 +163,18 @@ public class PosServiceBcImpl implements PosServiceBc {
             }
         }
 
+        PosBranch posBranch = null;
+        try {
+            TypedQuery<PosBranch> posBranchs = entityManager.createQuery("select m from " + PosBranch.class.getSimpleName() + " m where m.code=:code", PosBranch.class);
+            posBranchs.setParameter("code", "001");
+            posBranch = posBranchs.getSingleResult();
+        } catch (Exception e) {
+        }
+
         Random rn = new Random();
         int answer = rn.nextInt(100000) + 1;
 
+        slsMaster.setPosBranch(posBranch);
         slsMaster.setCode("S" + answer);
         slsMaster.setEmbdAuditable(new EmbdAuditable(authUser, new Date()));
 
@@ -192,7 +201,7 @@ public class PosServiceBcImpl implements PosServiceBc {
 
         MAP_UUID_MAP_PROD_QTY.remove(uuid);
 
-        Map<String, String> ret = new LinkedHashMap<>();
+        Map<String, String> ret = new LinkedHashMap();
 
         ret.put("status", "ok");
 
@@ -218,7 +227,7 @@ public class PosServiceBcImpl implements PosServiceBc {
             MAP_UUID_MAP_PROD_QTY.remove(uuid);
         }
         System.out.println("maps:::217:" + MAP_UUID_MAP_PROD_QTY);
-        Map<String, String> ret = new LinkedHashMap<>();
+        Map<String, String> ret = new LinkedHashMap();
 
         ret.put("status", "ok");
 
@@ -268,7 +277,7 @@ public class PosServiceBcImpl implements PosServiceBc {
         }
 
         if (pp == null) {
-            Map<String, String> ret = new LinkedHashMap<>();
+            Map<String, String> ret = new LinkedHashMap();
             ret.put("status", "error");
             ret.put("message", "Product not found.");
             return ret;
@@ -291,7 +300,7 @@ public class PosServiceBcImpl implements PosServiceBc {
         Map<String, Map<PosProduct, Double>> MAP_UUID_MAP_PROD_QTY = MAPS.get(sid);
 
         if (MAP_UUID_MAP_PROD_QTY == null) {
-            MAP_UUID_MAP_PROD_QTY = new LinkedHashMap<>();
+            MAP_UUID_MAP_PROD_QTY = new LinkedHashMap();
         }
 
         if (!MAP_UUID_MAP_PROD_QTY.containsKey(uuid)) {
@@ -350,7 +359,7 @@ public class PosServiceBcImpl implements PosServiceBc {
             cnt++;
         }
 
-        Map<String, String> ret = new LinkedHashMap<>();
+        Map<String, String> ret = new LinkedHashMap();
         ret.put("status", "ok");
         ret.put("message", "");
         ret.put("salesLines", salesLines);

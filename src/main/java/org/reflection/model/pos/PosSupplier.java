@@ -11,7 +11,7 @@ public class PosSupplier extends PosProductAc {
 
     @Column(name = "MOBILE", length = 20, nullable = false, unique = true)
     private String mobile;
-    @Column(name = "ADDRESS", length = 200)
+    @Column(name = "ADDRESS", length = 255)
     private String address;
 
     @Enumerated(EnumType.STRING)

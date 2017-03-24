@@ -32,16 +32,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         try {
             AuthUser authUser = authUserService.findByUsername(username);
 
-            Hibernate.initialize(authUser.getAuthUserAuthRoles());
+            Hibernate.initialize(authUser.getAuthRoles());
 
-            Set<GrantedAuthority> authorities = new LinkedHashSet<>();
+            Set<GrantedAuthority> authorities = new LinkedHashSet();
 
-            for (org.reflection.model.auth.AuthUserAuthRole authUserAuthRole : authUser.getAuthUserAuthRoles()) {
-                authorities.add(new SimpleGrantedAuthority("ROLE_" + authUserAuthRole.getAuthRole().getAuthority()));
+            for (org.reflection.model.auth.AuthRole authRole : authUser.getAuthRoles()) {
+                authorities.add(new SimpleGrantedAuthority("ROLE_" + authRole.getAuthority()));
             }
-//        for (org.reflection.model.security.AuthRole authRole : user.getAuthRoles()) {
-//            authorities.add(new SimpleGrantedAuthority("ROLE_" + authRole.getAuthority()));
-//        }
 
             AuthUserExt authUserExt
                     = new AuthUserExt(authUser.getUsername(), authUser.getPassword(), authorities);

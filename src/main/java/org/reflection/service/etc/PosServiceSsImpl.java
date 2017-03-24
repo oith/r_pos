@@ -165,11 +165,13 @@ public class PosServiceSsImpl implements PosServiceSs {
             sid = "mac";
         }
 
+
+
         Map<String, Set<_PosProductLineDTO>> MAP_UUID_MAP_PROD_QTY = MAPS.get(sid);
         Set<_PosProductLineDTO> currSalesMaps = MAP_UUID_MAP_PROD_QTY.get(uuid);
 
         if (currSalesMaps == null || currSalesMaps.isEmpty()) {
-            Map<String, String> ret = new LinkedHashMap<>();
+            Map<String, String> ret = new LinkedHashMap();
 
             ret.put("status", "error");
             ret.put("message", "No Product choose to sale.");
@@ -178,7 +180,7 @@ public class PosServiceSsImpl implements PosServiceSs {
         }
 
         if (paidAmount == null || paidAmount <= 0) {
-            Map<String, String> ret = new LinkedHashMap<>();
+            Map<String, String> ret = new LinkedHashMap();
 
             ret.put("status", "error");
             ret.put("message", "Paid Amount not given.");
@@ -216,9 +218,18 @@ public class PosServiceSsImpl implements PosServiceSs {
         } catch (Exception e) {
         }
 
+        PosBranch posBranch = null;
+        try {
+            TypedQuery<PosBranch> posBranchs = entityManager.createQuery("select m from " + PosBranch.class.getSimpleName() + " m where m.code=:code", PosBranch.class);
+            posBranchs.setParameter("code", "001");
+            posBranch = posBranchs.getSingleResult();
+        } catch (Exception e) {
+        }
+
         Random rn = new Random();
         int answer = rn.nextInt(100000) + 1;
 
+        slsMaster.setPosBranch(posBranch);
         slsMaster.setCode("S" + answer);
         slsMaster.setEmbdAuditable(new EmbdAuditable(authUser, new Date()));
 
@@ -246,7 +257,7 @@ public class PosServiceSsImpl implements PosServiceSs {
         entityManager.getTransaction().commit();
 
         MAP_UUID_MAP_PROD_QTY.remove(uuid);
-        Map<String, String> ret = new LinkedHashMap<>();
+        Map<String, String> ret = new LinkedHashMap();
         ret.put("status", "ok");
         return ret;
     }
@@ -269,7 +280,7 @@ public class PosServiceSsImpl implements PosServiceSs {
         Set<_PosProductLineDTO> currSalesMaps = MAP_UUID_MAP_PROD_QTY.get(uuid);
 
         if (currSalesMaps == null || currSalesMaps.isEmpty()) {
-            Map<String, String> ret = new LinkedHashMap<>();
+            Map<String, String> ret = new LinkedHashMap();
 
             ret.put("status", "error");
             ret.put("message", "No Product choose to sale.");
@@ -278,7 +289,7 @@ public class PosServiceSsImpl implements PosServiceSs {
         }
 
         if (paidAmount == null || paidAmount <= 0) {
-            Map<String, String> ret = new LinkedHashMap<>();
+            Map<String, String> ret = new LinkedHashMap();
 
             ret.put("status", "error");
             ret.put("message", "Paid Amount not given.");
@@ -360,7 +371,7 @@ public class PosServiceSsImpl implements PosServiceSs {
 
         MAP_UUID_MAP_PROD_QTY.remove(uuid);
 
-        Map<String, String> ret = new LinkedHashMap<>();
+        Map<String, String> ret = new LinkedHashMap();
 
         ret.put("status", "ok");
 
@@ -386,7 +397,7 @@ public class PosServiceSsImpl implements PosServiceSs {
             MAP_UUID_MAP_PROD_QTY.remove(uuid);
         }
         System.out.println("maps:::217:" + MAP_UUID_MAP_PROD_QTY);
-        Map<String, String> ret = new LinkedHashMap<>();
+        Map<String, String> ret = new LinkedHashMap();
 
         ret.put("status", "ok");
 
@@ -462,7 +473,7 @@ public class PosServiceSsImpl implements PosServiceSs {
         }
 
         if (pp == null) {
-            Map<String, String> ret = new LinkedHashMap<>();
+            Map<String, String> ret = new LinkedHashMap();
             ret.put("status", "error");
             ret.put("message", "Product not found.");
             return ret;
@@ -482,7 +493,7 @@ public class PosServiceSsImpl implements PosServiceSs {
         Map<String, Set<_PosProductLineDTO>> MAP_UUID_MAP_PROD_QTY = MAPS.get(sid);
 
         if (MAP_UUID_MAP_PROD_QTY == null) {
-            MAP_UUID_MAP_PROD_QTY = new LinkedHashMap<>();
+            MAP_UUID_MAP_PROD_QTY = new LinkedHashMap();
         }
 
         if (!MAP_UUID_MAP_PROD_QTY.containsKey(uuid)) {
@@ -548,7 +559,7 @@ public class PosServiceSsImpl implements PosServiceSs {
             cnt++;
         }
 
-        Map<String, String> ret = new LinkedHashMap<>();
+        Map<String, String> ret = new LinkedHashMap();
         ret.put("status", "ok");
         ret.put("message", "");
         ret.put("salesLines", salesLines.toString());

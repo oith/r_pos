@@ -187,7 +187,7 @@ public class PosAdjustmentDetailController extends _BaseController {
         model.addAttribute(MODELS, posAdjustmentDetails);
         model.addAttribute(SEARCH_CRITERIA, searchCriteria);
         
-        List<Integer> pages = new ArrayList<>();
+        List<Integer> pages = new ArrayList();
         for (int i = 1; i <= searchCriteria.getTotalPages(); i++) {
             pages.add(i);
         }
@@ -213,7 +213,7 @@ public class PosAdjustmentDetailController extends _BaseController {
         model.addAttribute(MODELS, posAdjustmentDetails);
         model.addAttribute(SEARCH_CRITERIA, searchCriteria);
     
-        List<Integer> pages = new ArrayList<>();
+        List<Integer> pages = new ArrayList();
         for (int i = 1; i <= searchCriteria.getTotalPages(); i++) {
             pages.add(i);
         }

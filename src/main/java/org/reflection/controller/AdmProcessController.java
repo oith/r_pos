@@ -2,10 +2,10 @@ package org.reflection.controller;
 
 import org.reflection.dto._SearchDTO;
 import org.reflection.exception.AdmProcessNotFoundException;
+import org.reflection.model.com.AdmModule;
 import org.reflection.model.com.AdmProcess;
-import org.reflection.model.com.AdmSubModule;
+import org.reflection.service.AdmModuleService;
 import org.reflection.service.AdmProcessService;
-import org.reflection.service.AdmSubModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,7 +18,7 @@ import java.math.BigInteger;
 
 @Controller
 @RequestMapping(value = "/admProcess")
-@SessionAttributes({"admSubModules"})
+@SessionAttributes({"admModules"})
 public class AdmProcessController extends _BaseController {
 
     protected static final String MODEL = "admProcess";
@@ -31,7 +31,7 @@ public class AdmProcessController extends _BaseController {
     private AdmProcessService admProcessService;
 
     @Autowired
-    private AdmSubModuleService admSubModuleService;
+    private AdmModuleService admModuleService;
 
 
     @GetMapping("/getCodableDTO")
@@ -47,9 +47,9 @@ public class AdmProcessController extends _BaseController {
         }
     }
 
-    @ModelAttribute("admSubModules")
-    public Iterable<AdmSubModule> admSubModules() {
-        return admSubModuleService.findAll();
+    @ModelAttribute("admModules")
+    public Iterable<AdmModule> admModules() {
+        return admModuleService.findAll();
     }
 
 
@@ -194,7 +194,7 @@ public class AdmProcessController extends _BaseController {
         model.addAttribute(MODELS, admProcesss);
         model.addAttribute(SEARCH_CRITERIA, searchCriteria);
         
-        List<Integer> pages = new ArrayList<>();
+        List<Integer> pages = new ArrayList();
         for (int i = 1; i <= searchCriteria.getTotalPages(); i++) {
             pages.add(i);
         }
@@ -220,7 +220,7 @@ public class AdmProcessController extends _BaseController {
         model.addAttribute(MODELS, admProcesss);
         model.addAttribute(SEARCH_CRITERIA, searchCriteria);
     
-        List<Integer> pages = new ArrayList<>();
+        List<Integer> pages = new ArrayList();
         for (int i = 1; i <= searchCriteria.getTotalPages(); i++) {
             pages.add(i);
         }

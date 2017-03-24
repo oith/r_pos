@@ -6,14 +6,15 @@ package org.reflection.service.auth;
 import org.hibernate.Hibernate;
 import org.reflection.dto._SearchDTO;
 import org.reflection.exception.AuthUserNotFoundException;
+import org.reflection.model.auth.AuthRole;
 import org.reflection.model.auth.AuthUser;
-import org.reflection.model.auth.AuthUserAuthRole;
 import org.reflection.repositories.AuthUserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.math.BigInteger;
 
 @Service("authUserService")
@@ -63,16 +64,16 @@ public class AuthUserServiceImpl implements AuthUserService {
         BeanUtils.copyProperties(copied, authUser);
         authUser.setId(null);
 
-        for (AuthUserAuthRole currDet : authUserOrginal.getAuthUserAuthRoles()) {
+        for (AuthRole currDet : authUserOrginal.getAuthRoles()) {
 
-            AuthUserAuthRole det = new AuthUserAuthRole();
+            AuthRole det = new AuthRole();
             BeanUtils.copyProperties(currDet, det);
 
-            det.setAuthUser(authUser);
-            if (authUser.getAuthUserAuthRoles() == null) {
-                authUser.setAuthUserAuthRoles(new java.util.LinkedHashSet());
-            }
-            authUser.getAuthUserAuthRoles().add(det);
+//            det.setAuthUser(authUser);
+//            if (authUser.getAuthRoles() == null) {
+//                authUser.setAuthRoles(new java.util.LinkedHashSet());
+//            }
+            authUser.getAuthRoles().add(det);
         }
 
 /*
@@ -101,7 +102,7 @@ public class AuthUserServiceImpl implements AuthUserService {
             throw new AuthUserNotFoundException();
         }
 
-        Hibernate.initialize(authUser.getAuthUserAuthRoles());
+        Hibernate.initialize(authUser.getAuthRoles());
 
         return authUser;
     }
@@ -112,7 +113,7 @@ public class AuthUserServiceImpl implements AuthUserService {
         Iterable<AuthUser> authUsers = authUserRepository.findAll();
 
         for (AuthUser authUser : authUsers) {
-            Hibernate.initialize(authUser.getAuthUserAuthRoles());
+            Hibernate.initialize(authUser.getAuthRoles());
         }
 
         return authUsers;

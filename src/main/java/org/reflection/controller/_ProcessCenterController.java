@@ -62,7 +62,7 @@ public class _ProcessCenterController extends _BaseController {
 
         List<_DualDTO> kk = new ArrayList();
         for (AdmProcess bbb : admProcessService.findAll()) {
-            _DualDTO bbbm = new _DualDTO(bbb.getId(), bbb.getAdmSubModule() + "-" + bbb);
+            _DualDTO bbbm = new _DualDTO(bbb.getId(), bbb.getAdmModule() + "-" + bbb);
             kk.add(bbbm);
         }
 
@@ -85,11 +85,11 @@ public class _ProcessCenterController extends _BaseController {
 
         if (moduleId == null) {
             for (AdmProcess bbb : admProcessService.findAll()) {
-                sb.append("<option value='").append(bbb.getId()).append("'>").append(bbb.getAdmSubModule()).append('-').append(bbb).append("</option>");
+                sb.append("<option value='").append(bbb.getId()).append("'>").append(bbb.getAdmModule()).append('-').append(bbb).append("</option>");
             }
         } else {
             for (AdmProcess bbb : admProcessService.findAll()) {
-                if (bbb.getAdmSubModule().getId().equals(moduleId)) {
+                if (bbb.getAdmModule().getId().equals(moduleId)) {
                     sb.append("<option value='").append(bbb.getId()).append("'>").append(bbb).append("</option>");
                 }
             }

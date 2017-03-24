@@ -3,13 +3,10 @@ package org.reflection.service;
  * @author mac
  */
 
-import org.hibernate.Hibernate;
 import org.reflection.dto._SearchDTO;
 import org.reflection.exception.AdmModuleNotFoundException;
 import org.reflection.model.com.AdmModule;
-import org.reflection.model.com.AdmSubModule;
 import org.reflection.repositories.AdmModuleRepository;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,18 +56,7 @@ public class AdmModuleServiceImpl implements AdmModuleService {
 
         copyProperties(copied, admModule);
 
-        for (AdmSubModule currDet : admModuleOrginal.getAdmSubModules()) {
 
-            AdmSubModule det = new AdmSubModule();
-            BeanUtils.copyProperties(currDet, det);
-            det.setId(null);
-
-            det.setAdmModule(admModule);
-            if (admModule.getAdmSubModules() == null) {
-                admModule.setAdmSubModules(new java.util.LinkedHashSet());
-            }
-            admModule.getAdmSubModules().add(det);
-        }
 
 
         return admModuleRepository.save(admModule);
@@ -83,7 +69,6 @@ public class AdmModuleServiceImpl implements AdmModuleService {
         to.setIsActive(from.getIsActive());
         to.setSlNo(from.getSlNo());
         to.setDescription(from.getDescription());
-        to.setAdmSubModules(from.getAdmSubModules());
 
     }
 
@@ -94,7 +79,6 @@ public class AdmModuleServiceImpl implements AdmModuleService {
         if (admModule == null) {
             throw new AdmModuleNotFoundException();
         }
-        Hibernate.initialize(admModule.getAdmSubModules());
 
         return admModule;
     }
@@ -103,11 +87,6 @@ public class AdmModuleServiceImpl implements AdmModuleService {
     @Transactional
     public Iterable<AdmModule> findAll() {
         Iterable<AdmModule> admModules = admModuleRepository.findAll();
-
-        for (AdmModule admModule : admModules) {
-            Hibernate.initialize(admModule.getAdmSubModules());
-
-        }
 
         return admModules;
     }

@@ -21,7 +21,7 @@ public class PosPurchaseMaster extends PosAbstractMaster {
     private Double changeAmount;
 
     @OneToMany(mappedBy = "posPurchaseMaster")
-    private Set<PosPurchaseDetail> posPurchaseDetails = new LinkedHashSet<>();
+    private Set<PosPurchaseDetail> posPurchaseDetails = new LinkedHashSet();
 
     public PosPurchaseMaster() {
     }

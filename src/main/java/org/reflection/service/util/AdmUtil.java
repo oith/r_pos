@@ -31,7 +31,7 @@ public class AdmUtil {
 
     public static List<Map<String, String>> getListFromDB(final String query) {
         EntityManager em = emf.createEntityManager();
-        List<Map<String, String>> ret = new ArrayList<>();
+        List<Map<String, String>> ret = new ArrayList();
         try {
 
             List koto = em.createQuery(query).getResultList();
@@ -194,8 +194,8 @@ public class AdmUtil {
 
         tableHead += "<th class='center bold'>Select All<br><input type='checkbox' id='checkAll'/></th>";
 
-        SortedSet<String> colAll = new TreeSet<>();
-        Map<String, Integer> mapColIndx = new LinkedHashMap<>();
+        SortedSet<String> colAll = new TreeSet();
+        Map<String, Integer> mapColIndx = new LinkedHashMap();
 
         if (queryAlias != null) {
             int cntt = 0;

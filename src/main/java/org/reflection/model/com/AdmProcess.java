@@ -1,6 +1,7 @@
 package org.reflection.model.com;
 
 import com.oith.annotation.MacCodable;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,11 +11,19 @@ import java.util.Set;
 @Entity
 @Table(name = "ADM_PROCESS")
 @MacCodable(id = "id", code = "code", caption = "fullName")
-public class AdmProcess extends AbstractAdm {
+public class AdmProcess  extends AbstractLookable {
 
-    @JoinColumn(name = "ADM_SUB_MODULE_ID", nullable = false)
+    @Column(name = "IS_ACTIVE")
+    private Boolean isActive = Boolean.TRUE;
+    @Column(name = "SL_NO")
+    @Range(min = 0, max = 100)
+    private Byte slNo;
+    @Column(name = "DESCRIPTION", length = 500)
+    private String description;
+
+    @JoinColumn(name = "ADM_MODULE_ID", nullable = false)
     @ManyToOne(optional = false)
-    private AdmSubModule admSubModule;
+    private AdmModule admModule;
     @NotNull
     @Size(min = 3, max = 2000)
     private String cmd;
@@ -31,13 +40,6 @@ public class AdmProcess extends AbstractAdm {
     public AdmProcess() {
     }
 
-    public AdmSubModule getAdmSubModule() {
-        return admSubModule;
-    }
-
-    public void setAdmSubModule(AdmSubModule admSubModule) {
-        this.admSubModule = admSubModule;
-    }
 
     public String getCmd() {
         return cmd;
@@ -79,4 +81,39 @@ public class AdmProcess extends AbstractAdm {
         this.processBtns = processBtns;
     }
 
+    public AdmModule getAdmModule() {
+        return admModule;
+    }
+
+    public void setAdmModule(AdmModule admModule) {
+        this.admModule = admModule;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public Byte getSlNo() {
+        return slNo;
+    }
+
+    @Override
+    public void setSlNo(Byte slNo) {
+        this.slNo = slNo;
+    }
+
+    @Override
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    @Override
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
+    }
 }

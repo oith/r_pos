@@ -2,10 +2,10 @@ package org.reflection.controller;
 
 import org.reflection.dto._SearchDTO;
 import org.reflection.exception.AdmReportNotFoundException;
+import org.reflection.model.com.AdmModule;
 import org.reflection.model.com.AdmReport;
-import org.reflection.model.com.AdmSubModule;
+import org.reflection.service.AdmModuleService;
 import org.reflection.service.AdmReportService;
-import org.reflection.service.AdmSubModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,7 +18,7 @@ import java.math.BigInteger;
 
 @Controller
 @RequestMapping(value = "/admReport")
-@SessionAttributes({"admSubModules"})
+@SessionAttributes({"admModules"})
 public class AdmReportController extends _BaseController {
 
     protected static final String MODEL = "admReport";
@@ -31,7 +31,7 @@ public class AdmReportController extends _BaseController {
     private AdmReportService admReportService;
 
     @Autowired
-    private AdmSubModuleService admSubModuleService;
+    private AdmModuleService admModuleService;
 
 
     @GetMapping("/getCodableDTO")
@@ -47,11 +47,10 @@ public class AdmReportController extends _BaseController {
         }
     }
 
-    @ModelAttribute("admSubModules")
-    public Iterable<AdmSubModule> admSubModules() {
-        return admSubModuleService.findAll();
+    @ModelAttribute("admModules")
+    public Iterable<AdmModule> admModules() {
+        return admModuleService.findAll();
     }
-
 
     private void commonPost(AdmReport currObject) {
 
@@ -194,7 +193,7 @@ public class AdmReportController extends _BaseController {
         model.addAttribute(MODELS, admReports);
         model.addAttribute(SEARCH_CRITERIA, searchCriteria);
         
-        List<Integer> pages = new ArrayList<>();
+        List<Integer> pages = new ArrayList();
         for (int i = 1; i <= searchCriteria.getTotalPages(); i++) {
             pages.add(i);
         }
@@ -220,7 +219,7 @@ public class AdmReportController extends _BaseController {
         model.addAttribute(MODELS, admReports);
         model.addAttribute(SEARCH_CRITERIA, searchCriteria);
     
-        List<Integer> pages = new ArrayList<>();
+        List<Integer> pages = new ArrayList();
         for (int i = 1; i <= searchCriteria.getTotalPages(); i++) {
             pages.add(i);
         }

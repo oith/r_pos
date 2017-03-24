@@ -101,7 +101,7 @@ public class ZxEmp extends Abstract {
     @Column(name = "VALUE")
     @CollectionTable(name = "ZX_EMP_ATTRIBUTES",
             joinColumns = @JoinColumn(name = "ZX_EMP_ID"))
-    private Map<String, String> attributes = new LinkedHashMap<>();
+    private Map<String, String> attributes = new LinkedHashMap();
 
     @ElementCollection(targetClass = ZxVacationEntry.class)
     @CollectionTable(name = "ZX_EMP_VACATIONS",
