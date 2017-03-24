@@ -61,7 +61,24 @@ Insert into AUTH_USER
     'MS', 'rowshon');
 COMMIT;
 
+Insert into AUTH_ROLE
+   (ID, VERSION, AUTHORITY, IS_ACTIVE)
+ Values
+   (1, 0, 'ADMIN', 1);
+Insert into AUTH_ROLE
+   (ID, VERSION, AUTHORITY, IS_ACTIVE)
+ Values
+   (2, 0, 'USER', 1);
+COMMIT;
 
+Insert into AUTH_REQUEST_MAP
+   (ID, VERSION, CONFIG_ATTRIBUTE, URL)
+ Values
+   (1, 0, '*', '/resources/**,/,/index,/login,/about,/signup');
+Insert into AUTH_REQUEST_MAP
+   (ID, VERSION, CONFIG_ATTRIBUTE, URL)
+ Values
+   (2, 0, 'USER', '/**');
 
 INSERT INTO POS_SUPPLIER
 (ID, CODE, FULL_NAME, FULL_NAME_NATIVE, SUPPLIER_GROUP,
@@ -340,4 +357,51 @@ VALUES
   (120, '120', '09 mm Vermatic Melamine Amber Board', '০৯ মিমি বার্মাটিক মেলামাইন অ্যাম্বার বোর্ড', 21,
    40, 20, 23, 2004, 546,
    432432, 52);
+
+    Insert into AUTH_GROUP
+   (ID, VERSION, AUTHORITY, IS_ACTIVE)
+ Values
+   (1, 0, 'ADMINS', 1);
+Insert into AUTH_GROUP
+   (ID, VERSION, AUTHORITY, IS_ACTIVE)
+ Values
+   (2, 0, 'NORMS', 1);
+
+Insert into AUTH_GROUP_AUTH_ROLE
+   (AUTH_GROUP_ID, AUTH_ROLE_ID)
+ Values
+   (1, 1);
+Insert into AUTH_GROUP_AUTH_ROLE
+   (AUTH_GROUP_ID, AUTH_ROLE_ID)
+ Values
+   (1, 2);
+Insert into AUTH_GROUP_AUTH_ROLE
+   (AUTH_GROUP_ID, AUTH_ROLE_ID)
+ Values
+   (2, 2);
+Insert into AUTH_USER_AUTH_GROUP
+   (AUTH_USER_ID, AUTH_GROUP_ID)
+ Values
+   (1, 1);
+Insert into AUTH_USER_AUTH_GROUP
+   (AUTH_USER_ID, AUTH_GROUP_ID)
+ Values
+   (2, 1);
+Insert into AUTH_USER_AUTH_GROUP
+   (AUTH_USER_ID, AUTH_GROUP_ID)
+ Values
+   (3, 1);
+Insert into AUTH_USER_AUTH_GROUP
+   (AUTH_USER_ID, AUTH_GROUP_ID)
+ Values
+   (4, 1);
+Insert into AUTH_USER_AUTH_ROLE
+   (INCLUDE_EXCLUDE, AUTH_ROLE_ID, AUTH_USER_ID)
+ Values
+   ('INCLUDE', 2, 1);
+Insert into AUTH_USER_AUTH_ROLE
+   (INCLUDE_EXCLUDE, AUTH_ROLE_ID, AUTH_USER_ID)
+ Values
+   ('EXCLUDE', 1, 1);
+
 
