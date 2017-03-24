@@ -11,7 +11,6 @@ import java.math.BigInteger;
 
 public interface PosProductAcService {
 
-
     public PosProductAc findById(BigInteger id) throws PosProductAcNotFoundException;
 
     public PosProductAc create(PosProductAc posProductAc);
