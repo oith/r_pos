@@ -22,9 +22,9 @@ public class PosProduct implements IAbstract, ICodeable, INameable {
 
     @Column(name = "CODE", length = 10, nullable = false, unique = true)
     private String code;
-    @Column(name = "FULL_NAME", length = 30, nullable = false)
+    @Column(name = "FULL_NAME", length = 100, nullable = false)
     private String fullName;
-    @Column(name = "FULL_NAME_NATIVE", length = 50, nullable = false)
+    @Column(name = "FULL_NAME_NATIVE", length = 255, nullable = false)
     private String fullNameNative;
 
     @Column(name = "TAG_CODE", length = 10, unique = true)
@@ -72,6 +72,21 @@ public class PosProduct implements IAbstract, ICodeable, INameable {
     @ManyToOne
     @JoinColumn(name = "AC_FIVE")
     private PosProductAc acFive;
+    @ManyToOne
+    @JoinColumn(name = "AC_SIX")
+    private PosProductAc acSix;
+    @ManyToOne
+    @JoinColumn(name = "AC_SEVEN")
+    private PosProductAc acSeven;
+    @ManyToOne
+    @JoinColumn(name = "AC_EIGHT")
+    private PosProductAc acEight;
+    @ManyToOne
+    @JoinColumn(name = "AC_NINE")
+    private PosProductAc acNine;
+    @ManyToOne
+    @JoinColumn(name = "AC_TEN")
+    private PosProductAc acTen;
 
     public PosProduct() {
     }
@@ -266,6 +281,54 @@ public class PosProduct implements IAbstract, ICodeable, INameable {
 
     public void setAcFive(PosProductAc acFive) {
         this.acFive = acFive;
+    }
+
+    public Boolean getVatCalc() {
+        return isVatCalc;
+    }
+
+    public void setVatCalc(Boolean vatCalc) {
+        isVatCalc = vatCalc;
+    }
+
+    public PosProductAc getAcSix() {
+        return acSix;
+    }
+
+    public void setAcSix(PosProductAc acSix) {
+        this.acSix = acSix;
+    }
+
+    public PosProductAc getAcSeven() {
+        return acSeven;
+    }
+
+    public void setAcSeven(PosProductAc acSeven) {
+        this.acSeven = acSeven;
+    }
+
+    public PosProductAc getAcEight() {
+        return acEight;
+    }
+
+    public void setAcEight(PosProductAc acEight) {
+        this.acEight = acEight;
+    }
+
+    public PosProductAc getAcNine() {
+        return acNine;
+    }
+
+    public void setAcNine(PosProductAc acNine) {
+        this.acNine = acNine;
+    }
+
+    public PosProductAc getAcTen() {
+        return acTen;
+    }
+
+    public void setAcTen(PosProductAc acTen) {
+        this.acTen = acTen;
     }
 
     @Override
