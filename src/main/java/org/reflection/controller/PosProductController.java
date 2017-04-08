@@ -2,10 +2,13 @@ package org.reflection.controller;
 
 import org.reflection.dto._SearchDTO;
 import org.reflection.exception.PosProductNotFoundException;
+import org.reflection.model.pos.EmPosAnalysisCode;
 import org.reflection.model.pos.PosProduct;
 import org.reflection.model.pos.PosProductAc;
+import org.reflection.model.pos.PosSupplier;
 import org.reflection.service.PosProductAcService;
 import org.reflection.service.PosProductService;
+import org.reflection.service.PosSupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -49,22 +52,22 @@ public class PosProductController extends _BaseController {
 
     @ModelAttribute("acOnes")
     public Iterable<PosProductAc> acOnes() {
-        return posProductAcService.findAll();
+        return posProductAcService.findAllByEmPosAnalysisCode(EmPosAnalysisCode.SUPPLIER);
     }
 
     @ModelAttribute("acTwos")
     public Iterable<PosProductAc> acTwos() {
-        return posProductAcService.findAll();
+        return posProductAcService.findAllByEmPosAnalysisCode(EmPosAnalysisCode.MEASURE);
     }
 
     @ModelAttribute("acThrees")
     public Iterable<PosProductAc> acThrees() {
-        return posProductAcService.findAll();
+        return posProductAcService.findAllByEmPosAnalysisCode(EmPosAnalysisCode.TYPE);
     }
 
     @ModelAttribute("acFours")
     public Iterable<PosProductAc> acFours() {
-        return posProductAcService.findAll();
+        return posProductAcService.findAllByEmPosAnalysisCode(EmPosAnalysisCode.ITEM);
     }
 
     @ModelAttribute("acFives")

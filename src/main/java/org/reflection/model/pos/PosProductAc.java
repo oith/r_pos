@@ -93,7 +93,9 @@ public class PosProductAc implements IAbstract, ICodeable, INameable {
 
     @Override
     public String toString() {
-        return code + "-" + fullName;
+        return fullName;
+        //return code + "-" + fullName;
     }
+
 }
 

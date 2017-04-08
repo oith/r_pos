@@ -5,6 +5,7 @@ package org.reflection.service;
 
 import org.reflection.dto._SearchDTO;
 import org.reflection.exception.PosProductAcNotFoundException;
+import org.reflection.model.pos.EmPosAnalysisCode;
 import org.reflection.model.pos.PosProductAc;
 import org.reflection.repositories.PosProductAcRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,5 +115,10 @@ public class PosProductAcServiceImpl implements PosProductAcService {
         }
         posProductAcRepository.delete(id);
         return posProductAc;
+    }
+
+    public Iterable<PosProductAc> findAllByEmPosAnalysisCode(EmPosAnalysisCode emPosAnalysisCode){
+       return posProductAcRepository.findAllByEmPosAnalysisCode(emPosAnalysisCode);
+
     }
 }

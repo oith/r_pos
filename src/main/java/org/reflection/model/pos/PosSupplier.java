@@ -54,4 +54,5 @@ public class PosSupplier extends PosProductAc {
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
+
 }

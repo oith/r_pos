@@ -5,6 +5,7 @@ package org.reflection.service;
 
 import org.reflection.dto._SearchDTO;
 import org.reflection.exception.PosProductAcNotFoundException;
+import org.reflection.model.pos.EmPosAnalysisCode;
 import org.reflection.model.pos.PosProductAc;
 
 import java.math.BigInteger;
@@ -26,4 +27,5 @@ public interface PosProductAcService {
     public Iterable<PosProductAc> findAll(_SearchDTO pageable);
 
     public Iterable<PosProductAc> findAll();
+    public Iterable<PosProductAc> findAllByEmPosAnalysisCode(EmPosAnalysisCode emPosAnalysisCode);
 }
