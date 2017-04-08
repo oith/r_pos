@@ -185,7 +185,7 @@
             <form:label path='acOne'><spring:message code='acOne' text='Ac One'/></form:label>
             <form:select class='form-control' path='acOne' name='acOne' id='acOne' >
                 <form:option value='${null}' label='--- Select ---'/>
-                <form:options items='${acOnes}' itemValue='id'/>
+                <form:options items='${acOnes}' itemValue='id' itemLabel="fullName"/>
             </form:select>
             <form:errors path='acOne' cssClass='error' element='div'/>
         </div>
